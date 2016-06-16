@@ -49,6 +49,8 @@
   mode). This is the case when a non-default cipher mode (anything else than AES 256 
   CBC) has been chosen or the `openssl` extension is not available.
 
+- `Helper::attributes()` is now part of the public API.
+
 ### Changed
 
 - The undocumented feature in `Cache::{write,read,delete,increment,decrement}()`, where 
@@ -82,6 +84,8 @@
   | `*Object::_parents()` | replaced, use `lithium\core\MergeInheritable::_inherit()` |
   | `*Object::_stop()` | _no replacement_, must reimplement |
   | `Object::__set_state()` | _no replacement_ |
+  | `*Object::invokeMethod()` | _no replacement_, use `call_user_func_array()` |
+  | `analysis\Inspector::invokeMethod()` | _no replacement_ |
 
 - Changing the default cipher and/or mode for the `Encrypt` strategy has been 
   deprecated and will cause the strategy to switch into _legacy_ mode. In legacy
