@@ -46,7 +46,7 @@ use lithium\storage\Cache;
  *
  * @see lithium\storage\cache\adapter
  */
-class File extends \lithium\storage\cache\Adapter {
+class File extends \lithium\storage\cache\Adapter implements \lithium\core\UniversalConstructor {
 
 	/**
 	 * The maximum line length of the file header storing meta data.
