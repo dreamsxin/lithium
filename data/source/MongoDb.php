@@ -20,6 +20,7 @@ use MongoDB\Driver\ReadConcern;
 use MongoDB\Driver\WriteConcern;
 use MongoDB\Driver\ReadPreference;
 use MongoDB\Driver\Command;
+use lithium\data\source\mongo_db\ReadPreferenceConstants;
 use lithium\aop\Filters;
 use lithium\util\Set;
 use lithium\util\Inflector;
@@ -52,7 +53,6 @@ use lithium\net\HostString;
  * @see lithium\data\source\MongoDb::__construct()
  * @link https://pecl.php.net/package/mongodb
  * @link http://www.mongodb.org/
- * @link https://github.com/alcaeus/mongo-php-adapter
  */
 class MongoDb extends \lithium\data\Source {
 
@@ -249,7 +249,7 @@ class MongoDb extends \lithium\data\Source {
 				'wTimeoutMS'               => 10000,
 				'journal'                  => true,
 				'readConcernLevel'         => ReadConcern::LOCAL,
-				'readPreference'           => ReadPreference::RP_PRIMARY,
+				'readPreference'           => ReadPreferenceConstants::RP_PRIMARY,
 				'readPreferenceTags'       => [],
 				'authSource'               => null,
 				'authMechanism'            => null,

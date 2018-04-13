@@ -9,7 +9,6 @@
 
 namespace lithium\data\source\mongo_db;
 
-use MongoGridFSFile;
 use IteratorIterator;
 
 /**
