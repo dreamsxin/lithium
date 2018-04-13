@@ -11,7 +11,7 @@ namespace lithium\data\source;
 
 use Exception;
 use MongoDB\Driver\Exception\BulkWriteException;
-use MongoDB\BSON\ObjectID;
+use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Javascript;
 use MongoDB\BSON\Regex;
 use MongoDB\Driver\Query;
@@ -154,7 +154,7 @@ class MongoDb extends \lithium\data\Source {
 	 *
 	 * The tyes in the schema map to database native type like this:
 	 * ```
-	 *  id      => MongoDB\BSON\ObjectID
+	 *  id      => MongoDB\BSON\ObjectId
 	 *  date    => MongoDB\BSON\UTCDateTime
 	 *  regex   => MongoDB\BSON\Regex
 	 *  integer => integer
@@ -527,7 +527,7 @@ class MongoDb extends \lithium\data\Source {
 			$source  = $args['source'];
 
 			$insertQuery = new BulkWrite(['ordered' => $options['ordered']]);
-			$data['create']['_id'] = empty($data['create']['_id']) ? new ObjectID() : $data['create']['_id'];
+			$data['create']['_id'] = empty($data['create']['_id']) ? new ObjectId() : $data['create']['_id'];
 			$insertQuery->insert($data['create']);
 
 			try {
@@ -786,7 +786,7 @@ class MongoDb extends \lithium\data\Source {
 					}
 					$fieldType = $on::schema()->type($key);
 
-					if ($fieldType === 'id' || $fieldType === 'MongoDB\BSON\ObjectID') {
+					if ($fieldType === 'id' || $fieldType === 'MongoDB\BSON\ObjectId') {
 						$isArray = $on::schema()->is('array', $key);
 						$link = $isArray ? $rel::LINK_KEY_LIST : $rel::LINK_KEY;
 						break;

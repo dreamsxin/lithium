@@ -9,7 +9,7 @@
 
 namespace lithium\data\source\mongo_db;
 
-use MongoDB\BSON\ObjectID;
+use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Javascript;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\BSON\Regex;
@@ -20,7 +20,7 @@ class Schema extends \lithium\data\DocumentSchema {
 	protected $_handlers = [];
 
 	protected $_types = [
-		'MongoDB\BSON\ObjectID'    => 'id',
+		'MongoDB\BSON\ObjectId'    => 'id',
 		'MongoDB\BSON\UTCDateTime' => 'date',
 		'MongoDB\BSON\Javascript'  => 'code',
 		'MongoDB\BSON\Binary'      => 'binary',
@@ -48,7 +48,7 @@ class Schema extends \lithium\data\DocumentSchema {
 
 		$this->_handlers += [
 			'id' => function($v) {
-				return is_string($v) && preg_match('/^[0-9a-f]{24}$/', $v) ? new ObjectID($v) : $v;
+				return is_string($v) && preg_match('/^[0-9a-f]{24}$/', $v) ? new ObjectId($v) : $v;
 			},
 			'date' => function($v) {
 				$v = is_numeric($v) ? (integer) $v : strtotime($v);

@@ -11,7 +11,7 @@ namespace lithium\tests\cases\data\source;
 
 use lithium\data\source\mongo_db\Schema;
 use lithium\data\source\MongoDb;
-use MongoDB\BSON\ObjectID;
+use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Javascript;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\BSON\Regex;
@@ -46,8 +46,8 @@ class MongoDbTest extends \lithium\test\Unit {
 		'guid'              => 'id',
 		'title'             => 'string',
 		'tags'              => ['type' => 'string', 'array' => true],
-		'comments'          => 'MongoDB\BSON\ObjectID',
-		'authors'           => ['type' => 'MongoDB\BSON\ObjectID', 'array' => true],
+		'comments'          => 'MongoDB\BSON\ObjectId',
+		'authors'           => ['type' => 'MongoDB\BSON\ObjectId', 'array' => true],
 		'created'           => 'MongoDB\BSON\UTCDateTime',
 		'modified'          => 'datetime',
 		'voters'            => ['type' => 'id', 'array' => true],
@@ -341,8 +341,8 @@ class MongoDbTest extends \lithium\test\Unit {
 
 		$query = new Query(['schema' => $schema, 'type' => 'read']);
 
-		$id = new ObjectID();
-		$userId = new ObjectID();
+		$id = new ObjectId();
+		$userId = new ObjectId();
 
 		$conditions = [
 			'_id' => (string) $id,
@@ -451,7 +451,7 @@ class MongoDbTest extends \lithium\test\Unit {
 	public function testCastingConditionsValues() {
 		$query = new Query(['schema' => new Schema(['fields' => $this->_schema])]);
 
-		$conditions = ['_id' => new ObjectID("4c8f86167675abfabdbe0300")];
+		$conditions = ['_id' => new ObjectId("4c8f86167675abfabdbe0300")];
 		$result = $this->_db->conditions($conditions, $query);
 		$this->assertEqual($conditions, $result);
 
@@ -459,7 +459,7 @@ class MongoDbTest extends \lithium\test\Unit {
 		$result = $this->_db->conditions($conditions, $query);
 
 		$this->assertEqual(array_keys($conditions), array_keys($result));
-		$this->assertInstanceOf('MongoDB\BSON\ObjectID', $result['_id']);
+		$this->assertInstanceOf('MongoDB\BSON\ObjectId', $result['_id']);
 		$this->assertEqual($conditions['_id'], (string) $result['_id']);
 
 		$conditions = ['_id' => [
@@ -469,7 +469,7 @@ class MongoDbTest extends \lithium\test\Unit {
 		$this->assertCount(3, $result['_id']['$in']);
 
 		foreach ([0, 1, 2] as $i) {
-			$this->assertInstanceOf('MongoDB\BSON\ObjectID', $result['_id']['$in'][$i]);
+			$this->assertInstanceOf('MongoDB\BSON\ObjectId', $result['_id']['$in'][$i]);
 		}
 
 		$conditions = ['voters' => ['$all' => [
@@ -480,7 +480,7 @@ class MongoDbTest extends \lithium\test\Unit {
 		$result = $result['voters']['$all'];
 
 		foreach ([0, 1] as $i) {
-			$this->assertInstanceOf('MongoDB\BSON\ObjectID', $result[$i]);
+			$this->assertInstanceOf('MongoDB\BSON\ObjectId', $result[$i]);
 			$this->assertEqual($conditions['voters']['$all'][$i], (string) $result[$i]);
 		}
 
@@ -493,7 +493,7 @@ class MongoDbTest extends \lithium\test\Unit {
 		$this->assertCount(2, $result['$or']);
 
 		foreach (['_id', 'guid'] as $i => $key) {
-			$this->assertInstanceOf('MongoDB\BSON\ObjectID', $result['$or'][$i][$key]);
+			$this->assertInstanceOf('MongoDB\BSON\ObjectId', $result['$or'][$i][$key]);
 			$this->assertEqual($conditions['$or'][$i][$key], (string) $result['$or'][$i][$key]);
 		}
 	}
@@ -510,7 +510,7 @@ class MongoDbTest extends \lithium\test\Unit {
 			])
 		]);
 
-		$user_id = new ObjectID();
+		$user_id = new ObjectId();
 		$conditions = ['members' => [
 			'$elemMatch' => [
 				'user_id' => (string) $user_id,
@@ -518,7 +518,7 @@ class MongoDbTest extends \lithium\test\Unit {
 			]
 		]];
 		$result = $this->_db->conditions($conditions, $query);
-		$this->assertInstanceOf('MongoDB\BSON\ObjectID', $result['members']['$elemMatch']['user_id']);
+		$this->assertInstanceOf('MongoDB\BSON\ObjectId', $result['members']['$elemMatch']['user_id']);
 		$this->assertInstanceOf('MongoDB\BSON\Regex', $result['members']['$elemMatch']['pattern']);
 	}
 
@@ -569,7 +569,7 @@ class MongoDbTest extends \lithium\test\Unit {
 
 	public function testCreateWithEmbeddedObjects() {
 		$data = [
-			'_id' => new ObjectID(),
+			'_id' => new ObjectId(),
 			'created' => new UTCDateTime(strtotime('-1 hour')),
 			'list' => ['foo', 'bar', 'baz']
 		];
@@ -581,7 +581,7 @@ class MongoDbTest extends \lithium\test\Unit {
 
 	public function testUpdateWithEmbeddedObjects() {
 		$data = [
-			'_id' => new ObjectID(),
+			'_id' => new ObjectId(),
 			'created' => new UTCDateTime(strtotime('-1 hour')),
 			'list' => ['foo', 'bar', 'baz']
 		];
