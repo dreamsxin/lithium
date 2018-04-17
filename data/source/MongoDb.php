@@ -392,8 +392,7 @@ class MongoDb extends \lithium\data\Source {
 	 * @return boolean Returns `true`.
 	 */
 	public function connect() {
-		$this->_isConnected = true;
-		return true;
+		return $this->_isConnected = true;
 	}
 
 	/**
