@@ -28,7 +28,7 @@ env:
   - DB=mysql TESTS=data
   - DB=pgsql TESTS=data
   - DB=couchdb TESTS=data
-  - DB=mongodb PHP_EXT=mongodb TESTS=data
+  - DB=mongodb TESTS=data
 
 php:
   - 7.0
