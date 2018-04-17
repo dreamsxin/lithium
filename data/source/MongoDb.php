@@ -360,15 +360,6 @@ class MongoDb extends \lithium\data\Source {
 	}
 
 	/**
-	 * Destructor. Ensures that the server connection is closed and resources are freed when
-	 * the adapter instance is destroyed.
-	 *
-	 * @return void
-	 */
-	public function __destruct() {
-	}
-
-	/**
 	 * Configures a model class by overriding the default dependencies for `'set'` and
 	 * `'entity'` , and sets the primary key to `'_id'`, in keeping with Mongo's conventions.
 	 *
